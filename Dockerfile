@@ -14,7 +14,8 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends --no-install
 	libncurses-dev \
 	clang-format-11 \
 	lcov \
-	libc++-dev
+	libc++-dev \
+	ninja-build
 RUN rm -Rf /var/lib/apt/lists/*
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 RUN pip install conan && conan config set general.revisions_enabled=1 && conan profile new default --detect
