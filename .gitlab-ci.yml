@@ -1,0 +1,17 @@
+stages:
+    - build-image
+
+cache:
+    key: "$CI_COMMIT_SHA"
+    paths:
+        - Dockerfile
+
+build-image:
+    image: docker:latest
+    stage: build-image
+    variables:
+        GIT_STRATEGY: none
+    script:
+        - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+        - docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME .
+        - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
