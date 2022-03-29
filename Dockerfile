@@ -21,11 +21,11 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
 RUN pip install conan && conan config set general.revisions_enabled=1 && conan profile new default --detect
 RUN conan remote remove conancenter
 RUN mkdir /root/Temp && cd /root/Temp
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.22.2/cmake-3.22.2.tar.gz -P /root/Temp && \
-	tar -xzf /root/Temp/cmake-3.22.2.tar.gz -C /root/Temp && \
-	/root/Temp/cmake-3.22.2/bootstrap && \
-	make /root/Temp/cmake-3.22.2 && \
-	make install /root/Temp/cmake-3.22.2
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.22.3.tar.gz -P /root/Temp && \
+	tar -xzf /root/Temp/cmake-3.22.3.tar.gz -C /root/Temp && \
+	/root/Temp/cmake-3.22.3/bootstrap && \
+	make /root/Temp/cmake-3.22.3 && \
+	make install /root/Temp/cmake-3.22.3
 RUN wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2 -P /root/Temp && \
 	tar -xf /root/Temp/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2 -C /usr/share/ && \
 	ln -s /usr/share/gcc-arm-none-eabi-9-2020-q2-update/bin/arm-none-eabi-gcc /usr/bin/arm-none-eabi-gcc && \
