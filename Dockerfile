@@ -43,5 +43,7 @@ RUN wget https://developer.arm.com/-/media/Files/downloads/gnu/11.2-2022.02/binr
 	ln -s /usr/share/gcc-arm-11.2-2022.02-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc-ranlib /usr/bin/arm-none-eabi-gcc-ranlib && \
 	ln -s /usr/lib/x86_64-linux-gnu/libncurses.so.6 /usr/lib/x86_64-linux-gnu/libncurses.so.5 && \
 	ln -s /usr/lib/x86_64-linux-gnu/libtinfo.so.6 /usr/lib/x86_64-linux-gnu/libtinfo.so.5
+RUN wget https://github.com/lz4/lz4/archive/refs/tags/v1.9.4.tar.gz -P /root/Temp && \
+	tar -xf /root/Temp/v1.9.4.tar.gz && cd lz4-1.9.4 && make && make install
 RUN rm -Rf /root/Temp
 CMD ["zsh"]
