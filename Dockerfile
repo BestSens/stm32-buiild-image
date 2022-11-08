@@ -16,6 +16,8 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends --no-install
 	lcov \
 	libc++-dev \
 	ninja-build \
+	autoconf \
+	gettext \
 	gnupg2
 RUN rm -Rf /var/lib/apt/lists/*
 
@@ -25,13 +27,6 @@ RUN pip install conan && conan config set general.revisions_enabled=1 && conan p
 RUN conan remote remove conancenter
 
 RUN mkdir -p /root/Temp && cd /root/Temp
-
-ARG CMAKE_VERSION=3.24.3
-RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz -P /root/Temp && \
-	tar -xzf /root/Temp/cmake-${CMAKE_VERSION}.tar.gz -C /root/Temp && \
-	/root/Temp/cmake-${CMAKE_VERSION}/bootstrap && \
-	make -j 6 /root/Temp/cmake-${CMAKE_VERSION} && \
-	make install /root/Temp/cmake-${CMAKE_VERSION}
 
 RUN wget https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/binrel/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi.tar.xz -P /root/Temp && \
 	tar -xf /root/Temp/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi.tar.xz -C /usr/share/ && \
@@ -51,8 +46,29 @@ RUN wget https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/binrel/
 	ln -s /usr/lib/x86_64-linux-gnu/libncurses.so.6 /usr/lib/x86_64-linux-gnu/libncurses.so.5 && \
 	ln -s /usr/lib/x86_64-linux-gnu/libtinfo.so.6 /usr/lib/x86_64-linux-gnu/libtinfo.so.5
 
-RUN wget https://github.com/lz4/lz4/archive/refs/tags/v1.9.4.tar.gz -P /root/Temp && \
-	tar -xf /root/Temp/v1.9.4.tar.gz && cd lz4-1.9.4 && make && make install
+ARG CMAKE_VERSION=3.24.3
+RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz -P /root/Temp && \
+	tar -xf /root/Temp/cmake-${CMAKE_VERSION}.tar.gz -C /root/Temp && \
+	cd /root/Temp/cmake-${CMAKE_VERSION} && \
+	./bootstrap && \
+	make -j 6 && \
+	make install
+
+ARG GIT_VERSION=2.38.1
+RUN wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar.xz -P /root/Temp && \
+	tar -xf /root/Temp/git-${GIT_VERSION}.tar.xz -C /root/Temp && \
+	cd /root/Temp/git-${GIT_VERSION} && \
+	make configure && \
+	./configure --prefix=/usr/local && \
+	make -j 6 all && \
+	make install
+
+ARG LZ4_VERSION=1.9.4
+RUN wget https://github.com/lz4/lz4/archive/refs/tags/v${LZ4_VERSION}.tar.gz -P /root/Temp && \
+	tar -xf /root/Temp/v${LZ4_VERSION}.tar.gz -C /root/Temp && \
+	cd /root/Temp/lz4-${LZ4_VERSION} && \
+	make -j 6 && \
+	make install
 
 RUN rm -Rf /root/Temp
 CMD ["zsh"]
