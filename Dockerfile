@@ -15,7 +15,8 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends --no-install
 	clang-format-11 \
 	lcov \
 	libc++-dev \
-	ninja-build
+	ninja-build \
+	gnupg2
 RUN rm -Rf /var/lib/apt/lists/*
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -28,7 +29,7 @@ RUN mkdir -p /root/Temp && cd /root/Temp
 RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz -P /root/Temp && \
 	tar -xzf /root/Temp/cmake-${CMAKE_VERSION}.tar.gz -C /root/Temp && \
 	/root/Temp/cmake-${CMAKE_VERSION}/bootstrap && \
-	make /root/Temp/cmake-${CMAKE_VERSION} && \
+	make -j 6 /root/Temp/cmake-${CMAKE_VERSION} && \
 	make install /root/Temp/cmake-${CMAKE_VERSION}
 	
 RUN wget https://developer.arm.com/-/media/Files/downloads/gnu/12.2.mpacbti-bet1/binrel/arm-gnu-toolchain-12.2.mpacbti-bet1-aarch64-arm-none-eabi.tar.xz -P /root/Temp && \
