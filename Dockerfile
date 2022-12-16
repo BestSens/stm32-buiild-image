@@ -47,7 +47,7 @@ RUN wget https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/binrel/
 	ln -s /usr/lib/x86_64-linux-gnu/libncurses.so.6 /usr/lib/x86_64-linux-gnu/libncurses.so.5 && \
 	ln -s /usr/lib/x86_64-linux-gnu/libtinfo.so.6 /usr/lib/x86_64-linux-gnu/libtinfo.so.5
 
-ARG CMAKE_VERSION=3.24.3
+ARG CMAKE_VERSION=3.25.1
 RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz -P /root/Temp && \
 	tar -xf /root/Temp/cmake-${CMAKE_VERSION}.tar.gz -C /root/Temp && \
 	cd /root/Temp/cmake-${CMAKE_VERSION} && \
