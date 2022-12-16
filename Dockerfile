@@ -29,21 +29,22 @@ RUN conan remote remove conancenter
 
 RUN mkdir -p /root/Temp && cd /root/Temp
 
-RUN wget https://developer.arm.com/-/media/Files/downloads/gnu/11.3.rel1/binrel/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi.tar.xz -P /root/Temp && \
-	tar -xf /root/Temp/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi.tar.xz -C /usr/share/ && \
-	ln -s /usr/share/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc /usr/bin/arm-none-eabi-gcc && \
-	ln -s /usr/share/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ /usr/bin/arm-none-eabi-g++ && \
-	ln -s /usr/share/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gdb /usr/bin/arm-none-eabi-gdb && \
-	ln -s /usr/share/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-size /usr/bin/arm-none-eabi-size && \
-	ln -s /usr/share/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-ar /usr/bin/arm-none-eabi-ar && \
-	ln -s /usr/share/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc-ar /usr/bin/arm-none-eabi-gcc-ar && \
-	ln -s /usr/share/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-objcopy /usr/bin/arm-none-eabi-objcopy && \
-	ln -s /usr/share/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-objdump /usr/bin/arm-none-eabi-objdump && \
-	ln -s /usr/share/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-nm /usr/bin/arm-none-eabi-nm && \
-	ln -s /usr/share/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc-nm /usr/bin/arm-none-eabi-gcc-nm && \
-	ln -s /usr/share/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-strip /usr/bin/arm-none-eabi-strip && \
-	ln -s /usr/share/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-ranlib /usr/bin/arm-none-eabi-ranlib && \
-	ln -s /usr/share/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc-ranlib /usr/bin/arm-none-eabi-gcc-ranlib && \
+ARG GCC_VERSION=11.3.rel1
+RUN wget https://developer.arm.com/-/media/Files/downloads/gnu/${GCC_VERSION}/binrel/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi.tar.xz -P /root/Temp && \
+	tar -xf /root/Temp/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi.tar.xz -C /usr/share/ && \
+	ln -s /usr/share/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc /usr/bin/arm-none-eabi-gcc && \
+	ln -s /usr/share/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ /usr/bin/arm-none-eabi-g++ && \
+	ln -s /usr/share/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi/bin/arm-none-eabi-gdb /usr/bin/arm-none-eabi-gdb && \
+	ln -s /usr/share/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi/bin/arm-none-eabi-size /usr/bin/arm-none-eabi-size && \
+	ln -s /usr/share/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi/bin/arm-none-eabi-ar /usr/bin/arm-none-eabi-ar && \
+	ln -s /usr/share/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc-ar /usr/bin/arm-none-eabi-gcc-ar && \
+	ln -s /usr/share/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi/bin/arm-none-eabi-objcopy /usr/bin/arm-none-eabi-objcopy && \
+	ln -s /usr/share/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi/bin/arm-none-eabi-objdump /usr/bin/arm-none-eabi-objdump && \
+	ln -s /usr/share/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi/bin/arm-none-eabi-nm /usr/bin/arm-none-eabi-nm && \
+	ln -s /usr/share/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc-nm /usr/bin/arm-none-eabi-gcc-nm && \
+	ln -s /usr/share/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi/bin/arm-none-eabi-strip /usr/bin/arm-none-eabi-strip && \
+	ln -s /usr/share/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi/bin/arm-none-eabi-ranlib /usr/bin/arm-none-eabi-ranlib && \
+	ln -s /usr/share/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc-ranlib /usr/bin/arm-none-eabi-gcc-ranlib && \
 	ln -s /usr/lib/x86_64-linux-gnu/libncurses.so.6 /usr/lib/x86_64-linux-gnu/libncurses.so.5 && \
 	ln -s /usr/lib/x86_64-linux-gnu/libtinfo.so.6 /usr/lib/x86_64-linux-gnu/libtinfo.so.5
 
