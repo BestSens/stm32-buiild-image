@@ -55,7 +55,7 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cm
 	make -j 6 && \
 	make install
 
-ARG GIT_VERSION=2.38.1
+ARG GIT_VERSION=2.39.0
 RUN wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar.xz -P /root/Temp && \
 	tar -xf /root/Temp/git-${GIT_VERSION}.tar.xz -C /root/Temp && \
 	cd /root/Temp/git-${GIT_VERSION} && \
