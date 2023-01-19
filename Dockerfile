@@ -29,7 +29,7 @@ RUN conan remote remove conancenter
 
 RUN mkdir -p /root/Temp && cd /root/Temp
 
-ARG GCC_VERSION=11.3.rel1
+ARG GCC_VERSION=12.2.rel1
 RUN wget https://developer.arm.com/-/media/Files/downloads/gnu/${GCC_VERSION}/binrel/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi.tar.xz -P /root/Temp && \
 	tar -xf /root/Temp/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi.tar.xz -C /usr/share/ && \
 	ln -s /usr/share/arm-gnu-toolchain-${GCC_VERSION}-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc /usr/bin/arm-none-eabi-gcc && \
@@ -56,7 +56,7 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cm
 	make -j 6 && \
 	make install
 
-ARG GIT_VERSION=2.39.0
+ARG GIT_VERSION=2.39.1
 RUN wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar.xz -P /root/Temp && \
 	tar -xf /root/Temp/git-${GIT_VERSION}.tar.xz -C /root/Temp && \
 	cd /root/Temp/git-${GIT_VERSION} && \
