@@ -48,7 +48,7 @@ RUN wget https://developer.arm.com/-/media/Files/downloads/gnu/${GCC_VERSION}/bi
 	ln -s /usr/lib/x86_64-linux-gnu/libncurses.so.6 /usr/lib/x86_64-linux-gnu/libncurses.so.5 && \
 	ln -s /usr/lib/x86_64-linux-gnu/libtinfo.so.6 /usr/lib/x86_64-linux-gnu/libtinfo.so.5
 
-ARG CMAKE_VERSION=3.25.1
+ARG CMAKE_VERSION=3.27.0
 RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz -P /root/Temp && \
 	tar -xf /root/Temp/cmake-${CMAKE_VERSION}.tar.gz -C /root/Temp && \
 	cd /root/Temp/cmake-${CMAKE_VERSION} && \
@@ -56,7 +56,7 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cm
 	make -j 6 && \
 	make install
 
-ARG GIT_VERSION=2.39.1
+ARG GIT_VERSION=2.41.0
 RUN wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar.xz -P /root/Temp && \
 	tar -xf /root/Temp/git-${GIT_VERSION}.tar.xz -C /root/Temp && \
 	cd /root/Temp/git-${GIT_VERSION} && \
