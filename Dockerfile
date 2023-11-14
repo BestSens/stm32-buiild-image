@@ -9,4 +9,6 @@ RUN apk add --no-cache \
 	clang-extra-tools \
 	samurai \
 	ccache \
-	cmake
+	cmake \
+	bash \
+	curl
