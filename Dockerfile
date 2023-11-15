@@ -5,6 +5,7 @@ RUN apk add --no-cache \
 	gdb-multiarch \
 	lz4 \
 	python3 \
+	py3-ecdsa \
 	git \
 	clang-extra-tools \
 	samurai \
