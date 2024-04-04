@@ -12,7 +12,8 @@ RUN apk add --no-cache \
 	ccache \
 	cmake \
 	bash \
-	curl
+	curl \
+	openssh-client
 
 ADD bestsens-SERVER-CA.crt /usr/share/ca-certificates/bestsens/bestsens-SERVER-CA.crt
 RUN cat /usr/share/ca-certificates/bestsens/bestsens-SERVER-CA.crt >> /etc/ssl/certs/ca-certificates.cr
