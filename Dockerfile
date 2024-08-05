@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3.19
 RUN apk add --no-cache \
 	gcc-arm-none-eabi \
 	g++-arm-none-eabi \
