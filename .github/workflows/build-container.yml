@@ -10,4 +10,5 @@ jobs:
         uses: macbre/push-to-ghcr@master
         with:
           image_name: bestsens/stm32-build-image
+          image_tag: gcc14
           github_token: ${{ secrets.GITHUB_TOKEN }}
